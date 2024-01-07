@@ -64,4 +64,5 @@ stages:
     - script:
         |
         echo Hello World
+        echo Pipeline Version $(Carpenter.Pipeline.Version)
       displayName: 'Hello World Script'
