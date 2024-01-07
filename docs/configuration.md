@@ -55,7 +55,7 @@ Currently there is no reason to use variable groups linked through the pipeline 
 
 The version of the pipeline. Used to accomodate rolling breaking changes across multiple pipelines. A breaking change
 could implement new functionality under an incremented version number, and move dependent pipelines over separately.
-This value is set by the `pipelineVersion` parameter. The default value is **1**. 
+This value is set by the `pipelineVersion` parameter. The default value is **2**. 
 
 To ensure that future changes to the pipeline do not break pipelines which extend this template, it is recommended
 that this parameter is passed to the template.
