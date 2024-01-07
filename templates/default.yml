@@ -22,5 +22,5 @@ stages:
   
     - script:
         |
-        echo "Hello World"
+        echo 'Hello World'
       displayName: 'Hello World Script'
