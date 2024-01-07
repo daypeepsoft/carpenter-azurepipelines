@@ -61,6 +61,9 @@ stages:
     - name: Carpenter.Pipeline.Version
       value: ${{ parameters.pipelineVersion }}
 
+    - name: Carpenter.Pipeline.Operations
+      value: ${{ convertToJson(parameters.pipelineOperations) }}
+
 
     steps:
     - checkout: self
