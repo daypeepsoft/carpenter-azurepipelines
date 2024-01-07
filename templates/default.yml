@@ -32,6 +32,10 @@ parameters:
   type: number
   default: 2
 
+- name: pipelineOperations
+  type: object
+  default: []
+
 
 stages:
 ##############################################################################
@@ -61,8 +65,7 @@ stages:
     steps:
     - checkout: self
   
-    - script:
-        |
+    - script: |
         echo Hello World
         echo Pipeline Version $(Carpenter.Pipeline.Version)
       displayName: 'Hello World Script'
