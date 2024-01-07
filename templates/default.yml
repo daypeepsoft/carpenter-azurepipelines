@@ -46,7 +46,7 @@ stages:
 
   jobs:
   - job: initialize
-    displayName: Initialize
+    displayName: Initialize pipeline
     
 
     pool:
