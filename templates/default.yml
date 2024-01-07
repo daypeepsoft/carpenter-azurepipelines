@@ -63,10 +63,22 @@ stages:
 
     - name: Carpenter.Pipeline.Operations
       value: ${{ convertToJson(parameters.pipelineOperations) }}
+    
+    - ${{ if not(containsValue(parameters.pipelineOperations,'ExcludePipeline')) }}:
+      - name: Carpenter.Pipeline.Path
+        value: $[ format('{0}/{1}/{2}', '$(Agent.BuildDirectory)', 's', 'Carpenter.AzurePipelines') ]
+
+    - ${{ if containsValue(parameters.pipelineOperations,'ExcludePipeline') }}:
+      - name: Carpenter.Pipeline.Path
+        value: $[ format('{0}/{1}', '$(Agent.BuildDirectory)', 's') ]
 
 
     steps:
     - checkout: self
+
+    # Include pipeline for access to pipeline scripts
+    - ${{ if not(containsValue(parameters.pipelineOperations,'ExcludePipeline')) }}:
+      - checkout: Carpenter
   
     - script: |
         echo Hello World
