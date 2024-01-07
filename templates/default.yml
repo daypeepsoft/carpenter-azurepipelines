@@ -1,0 +1,26 @@
+stages:
+##############################################################################
+#  Developer pipeline stage
+#
+#  - Initializes entire pipeline
+# 
+##############################################################################
+- stage: dev
+  displayName: Developer
+
+
+  jobs:
+  - job: initialize
+    displayName: Initialize
+    
+
+    pool:
+      name: Default
+
+    steps:
+    - checkout: self
+  
+    - script:
+        |
+        echo "Hello World"
+      displayName: 'Hello World Script'
