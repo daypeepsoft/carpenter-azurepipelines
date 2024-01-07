@@ -2,7 +2,7 @@
 
 Pipeline versioning in Carpenter-AzurePipelines allows breaking changes to be made to the common template yaml without
 breaking builds which extend the Carpenter templates. This is accomplished through the 
-[`pipelineVersion`](..\configuration.md#carpenterpipelineversion-pipelineversion) parameter and conditions defined in
+[`pipelineVersion`](../configuration.md#carpenterpipelineversion-pipelineversion) parameter and conditions defined in
 the template yaml files.
 
 ## Usage
@@ -15,7 +15,7 @@ stages:
     pipelineVersion: 2
 ```
 
-When making a breaking change [`pipelineVersion`](..\configuration.md#carpenterpipelineversion-pipelineversion)
+When making a breaking change [`pipelineVersion`](../configuration.md#carpenterpipelineversion-pipelineversion)
 can be used to require manual intervention to pipelines which extend this template.
 
 This step can be modified:
@@ -41,7 +41,7 @@ Once a pipeline has been validated, the pipeline version can be updated to 3 to 
 
 ## Deprecation
 
-The [`pipelineVersion`](..\configuration.md#carpenterpipelineversion-pipelineversion)
+The [`pipelineVersion`](../configuration.md#carpenterpipelineversion-pipelineversion)
 parameter can also be used for template feature deprecation.
 
 For example, warn that a feature should no longer be used:

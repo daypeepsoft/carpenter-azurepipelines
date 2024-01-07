@@ -18,10 +18,10 @@ or [template usage](https://docs.microsoft.com/en-us/azure/devops/pipelines/proc
 
 Features are being migrated from v1 of this project and will be coming soon®.
 
-And more! Additional features described at: [docs/features.md](docs\features.md)
+And more! Additional features described at: [docs/features.md](docs/features.md)
 
 ## Contributing
 
 For details on development, please see the [Carpenter development wiki](https://dev.azure.com/Daypeep/Carpenter/_wiki/wikis/Carpenter.wiki).
 
-Please also take note of the Carpenter [Code of Conduct](docs\CODE_OF_CONDUCT.md) and [Contributing guidelines](docs\CONTRIBUTING.md).
+Please also take note of the Carpenter [Code of Conduct](docs/CODE_OF_CONDUCT.md) and [Contributing guidelines](docs/CONTRIBUTING.md).
