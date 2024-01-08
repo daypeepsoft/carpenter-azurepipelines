@@ -72,6 +72,8 @@ stages:
       - name: Carpenter.Pipeline.Path
         value: $[ format('{0}/{1}', '$(Agent.BuildDirectory)', 's') ]
 
+    - name: Carpenter.Pipeline.ScriptPath
+      value: $[ format('{0}/{1}', variables['Carpenter.Pipeline.Path'], 'scripts') ]
 
     steps:
     - checkout: self
