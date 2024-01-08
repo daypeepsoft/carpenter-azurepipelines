@@ -64,8 +64,11 @@ stages:
     - name: Carpenter.Pipeline.Operations
       value: ${{ convertToJson(parameters.pipelineOperations) }}
     
+    - name: Carpenter.Pipeline.Directory
+      value: '.carpenter-azurepipelines'
+
     - name: Carpenter.Pipeline.Path
-      value: $[ format('{0}/{1}/{2}', '$(Agent.BuildDirectory)', 's', '.carpenter-azurepipelines') ]
+      value: $[ format('{0}/{1}/{2}', '$(Agent.BuildDirectory)', 's', variables['Carpenter.Pipeline.Directory']) ]
     
     - name: Carpenter.Pipeline.ScriptPath
       value: $[ format('{0}/{1}', variables['Carpenter.Pipeline.Path'], 'scripts') ]
@@ -77,7 +80,7 @@ stages:
     # Include pipeline for access to pipeline scripts
     - ${{ if not(containsValue(parameters.pipelineOperations,'ExcludePipeline')) }}:
       - checkout: Carpenter
-        path: $(Carpenter.Pipeline.Path)
+        path: $(Carpenter.Pipeline.Directory)
 
     # Display information about the pipeline environment
     - task: PowerShell@2
