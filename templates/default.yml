@@ -81,8 +81,11 @@ stages:
     # Include pipeline for access to pipeline scripts
     - ${{ if not(containsValue(parameters.pipelineOperations,'ExcludePipeline')) }}:
       - checkout: Carpenter
-  
-    - script: |
-        echo Hello World
-        echo Pipeline Version $(Carpenter.Pipeline.Version)
-      displayName: 'Hello World Script'
+
+    - task: PowerShell@2
+      inputs:
+        targetType: 'filePath'
+        filePath: $(Carpenter.Pipeline.ScriptPath)/ShowEnvironment.ps1
+      displayName: Show environment information
+      name: showEnvironment
+      
