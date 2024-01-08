@@ -41,7 +41,7 @@ stages:
 ##############################################################################
 #  Developer pipeline stage
 #
-#  - Initializes entire pipeline
+#  - Initializes pipeline
 # 
 ##############################################################################
 - stage: dev

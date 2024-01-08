@@ -10,7 +10,7 @@ the template yaml files.
 You can define the pipline version that you want to use in your pipeline yaml:
 ```
 stages:
-- template: template/carpenter-default.yml@Carpenter
+- template: template/default.yml@Carpenter
   parameters:
     pipelineVersion: 2
 ```
@@ -36,8 +36,6 @@ to this:
 ```
 
 while not breaking existing pipelines that extend the template.
-
-Once a pipeline has been validated, the pipeline version can be updated to 3 to pull in the new functionality.
 
 ## Deprecation
 

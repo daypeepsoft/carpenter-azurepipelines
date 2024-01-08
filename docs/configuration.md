@@ -10,6 +10,8 @@ Carpenter-AzurePipelines can be easily configured using the documentation below.
   * [Pipeline Definition Variable Group](#pipeline-definition-variable-group)
 * [Pipeline Settings](#pipeline-settings)
   * [Carpenter.Pipeline.Version (pipelineVersion)](#carpenterpipelineversion-pipelineversion)
+  * [Carpenter.Pipeline.Operations (pipelineOperations)](#carpenterpipelineoperations-pipelineoperations)
+  * [Carpenter.Pipeline.Path](#carpenterpipelinepath)
 
 ## Settings hierarchy
 
@@ -61,3 +63,13 @@ To ensure that future changes to the pipeline do not break pipelines which exten
 that this parameter is passed to the template.
 
 For more information, see: [pipeline-versioning.md](features/pipeline-versioning.md)
+
+### Carpenter.Pipeline.Operations (pipelineOperations)
+
+Defines the operations for a pipeline. This value is set by the `pipelineOperations` parameter.
+
+For more information, see: [operations.md](operations.md)
+
+### Carpenter.Pipeline.Path
+
+The absolute path to the Carpenter pipeline supporting files. This value is determined during template expansion.

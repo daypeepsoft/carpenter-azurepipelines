@@ -1,6 +1,6 @@
 ![Carpenter](media/Carpenter-Title_400x122.png)
 
-# Carpenter AzurePipelines 
+# Carpenter-AzurePipelines 
 Copyright © 2015-2024 [Daypeep](https://www.daypeep.com)
 
 Carpenter-AzurePipelines provides common YAML templates and scripts for Azure Pipelines definitions.
@@ -12,6 +12,8 @@ For more information on Azure Pipelines see the [YAML schema](https://docs.micro
 or [template usage](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/templates?view=azure-devops) documentation.
 
 * [Features](#features)
+* [Usage](#usage)
+  * [Configuration](#configuration)
 * [Contributing](#contributing)
 
 ## Features
@@ -19,6 +21,16 @@ or [template usage](https://docs.microsoft.com/en-us/azure/devops/pipelines/proc
 Features are being migrated from v1 of this project and will be coming soon®.
 
 And more! Additional features described at: [docs/features.md](docs/features.md)
+
+## Usage
+
+| Method | Description |
+|:-------|:------------|
+| [Direct Access](docs/usage-direct.md) | Directly access Carpenter-AzurePipelines by referencing from your projects pipeline yaml. |
+
+### Configuration
+
+More information on configuring Carpenter-AzurePipelines can be found at: [docs/configuration.md](docs/configuration.md)
 
 ## Contributing
 
