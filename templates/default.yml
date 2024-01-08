@@ -76,7 +76,7 @@ stages:
     steps:
     # Include caller source
     - checkout: self
-      path: s/$[ variables['Build.Respository.Name'] ]
+      path: s/$(Carpenter.Pipeline.Directory)
 
     # Include pipeline for access to pipeline scripts
     - ${{ if not(containsValue(parameters.pipelineOperations,'ExcludePipeline')) }}:
