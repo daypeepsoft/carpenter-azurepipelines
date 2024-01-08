@@ -2,7 +2,7 @@
 #    Build processes, templates, and scripts for Azure DevOps pipelines.
 #
 #
-#    Copyright © 2021-2024 Daypeep, All rights reserved.
+#    Copyright Â© 2021-2024 Daypeep, All rights reserved.
 #
 #    Permission is hereby granted, free of charge, to any person obtaining a copy
 #    of this software and associated documentation files (the "Software"), to deal
@@ -64,24 +64,22 @@ stages:
     - name: Carpenter.Pipeline.Operations
       value: ${{ convertToJson(parameters.pipelineOperations) }}
     
-    - ${{ if not(containsValue(parameters.pipelineOperations,'ExcludePipeline')) }}:
-      - name: Carpenter.Pipeline.Path
-        value: $[ format('{0}/{1}/{2}', '$(Agent.BuildDirectory)', 's', 'Carpenter.AzurePipelines') ]
-
-    - ${{ if containsValue(parameters.pipelineOperations,'ExcludePipeline') }}:
-      - name: Carpenter.Pipeline.Path
-        value: $[ format('{0}/{1}', '$(Agent.BuildDirectory)', 's') ]
-
+    - name: Carpenter.Pipeline.Path
+      value: $[ format('{0}/{1}/{2}', '$(Agent.BuildDirectory)', 's', '.carpenter-azurepipelines') ]
+    
     - name: Carpenter.Pipeline.ScriptPath
       value: $[ format('{0}/{1}', variables['Carpenter.Pipeline.Path'], 'scripts') ]
 
     steps:
+    # Include caller source
     - checkout: self
 
     # Include pipeline for access to pipeline scripts
     - ${{ if not(containsValue(parameters.pipelineOperations,'ExcludePipeline')) }}:
       - checkout: Carpenter
+        path: $(Carpenter.Pipeline.Path)
 
+    # Display information about the pipeline environment
     - task: PowerShell@2
       inputs:
         targetType: 'filePath'
