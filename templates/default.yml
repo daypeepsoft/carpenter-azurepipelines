@@ -32,12 +32,16 @@ parameters:
   type: number
   default: 2
 
+- name: pipelineOperations
+  type: object
+  default: []
+
 
 stages:
 ##############################################################################
 #  Developer pipeline stage
 #
-#  - Initializes entire pipeline
+#  - Initializes pipeline
 # 
 ##############################################################################
 - stage: dev
@@ -57,12 +61,26 @@ stages:
     - name: Carpenter.Pipeline.Version
       value: ${{ parameters.pipelineVersion }}
 
+    - name: Carpenter.Pipeline.Operations
+      value: ${{ convertToJson(parameters.pipelineOperations) }}
+    
+    - ${{ if not(containsValue(parameters.pipelineOperations,'ExcludePipeline')) }}:
+      - name: Carpenter.Pipeline.Path
+        value: $[ format('{0}/{1}/{2}', '$(Agent.BuildDirectory)', 's', 'Carpenter.AzurePipelines') ]
+
+    - ${{ if containsValue(parameters.pipelineOperations,'ExcludePipeline') }}:
+      - name: Carpenter.Pipeline.Path
+        value: $[ format('{0}/{1}', '$(Agent.BuildDirectory)', 's') ]
+
 
     steps:
     - checkout: self
+
+    # Include pipeline for access to pipeline scripts
+    - ${{ if not(containsValue(parameters.pipelineOperations,'ExcludePipeline')) }}:
+      - checkout: Carpenter
   
-    - script:
-        |
+    - script: |
         echo Hello World
         echo Pipeline Version $(Carpenter.Pipeline.Version)
       displayName: 'Hello World Script'
