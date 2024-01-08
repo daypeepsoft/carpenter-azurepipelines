@@ -73,3 +73,7 @@ For more information, see: [operations.md](operations.md)
 ### Carpenter.Pipeline.Path
 
 The absolute path to the Carpenter pipeline supporting files. This value is determined during template expansion.
+
+### Carpenter.Pipeline.ScriptPath
+
+The absolute path to the Carpenter pipeline scripts. This value is determined during template expansion.
