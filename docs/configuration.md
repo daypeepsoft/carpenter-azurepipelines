@@ -11,7 +11,9 @@ Carpenter-AzurePipelines can be easily configured using the documentation below.
 * [Pipeline Settings](#pipeline-settings)
   * [Carpenter.Pipeline.Version (pipelineVersion)](#carpenterpipelineversion-pipelineversion)
   * [Carpenter.Pipeline.Operations (pipelineOperations)](#carpenterpipelineoperations-pipelineoperations)
+  * [Carpenter.Pipeline.Directory](#carpenterpipelinedirectory)
   * [Carpenter.Pipeline.Path](#carpenterpipelinepath)
+  * [Carpenter.Pipeline.ScriptPath](#carpenterpipelinescriptpath)
 
 ## Settings hierarchy
 
@@ -69,6 +71,10 @@ For more information, see: [pipeline-versioning.md](features/pipeline-versioning
 Defines the operations for a pipeline. This value is set by the `pipelineOperations` parameter.
 
 For more information, see: [operations.md](operations.md)
+
+### Carpenter.Pipeline.Directory
+
+The name of the directory that contains the Carpenter pipeline supporting files. The value is **.carpenter-azurepipelines**.
 
 ### Carpenter.Pipeline.Path
 
