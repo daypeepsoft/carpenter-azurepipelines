@@ -98,8 +98,7 @@ stages:
       inputs:
         targetType: 'filePath'
         filePath: $(Carpenter.Pipeline.ScriptPath)/InitializePipeline.ps1
-        ${{ if eq(variables['System.Debug'],'True') }}:
-          debugPreference: continue
+        debugPreference: continue
       displayName: Initialize pipeline
       name: initializePipeline
       
