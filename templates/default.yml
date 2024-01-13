@@ -94,12 +94,12 @@ stages:
       name: showEnvironment
       
     # Execute Pipeline initialization
-    - task: PowerShell@2
-      inputs:
-        targetType: 'filePath'
-        filePath: $(Carpenter.Pipeline.ScriptPath)/InitializePipeline.ps1
-        ${{ if eq(variables['System.Debug'],'true') }}:
-          debugPreference: continue
-      displayName: Initialize pipeline
-      name: initializePipeline
+    ${{ if eq(variables['System.Debug'],'True') }}:
+        - task: PowerShell@2
+          inputs:
+            targetType: 'filePath'
+            filePath: $(Carpenter.Pipeline.ScriptPath)/InitializePipeline.ps1
+            debugPreference: continue
+          displayName: Initialize pipeline
+          name: initializePipeline
       
