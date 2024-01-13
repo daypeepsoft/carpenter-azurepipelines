@@ -50,7 +50,7 @@ stages:
 
   jobs:
   - job: initialize
-    displayName: Initialize pipeline
+    displayName: Initialize
     
 
     pool:
@@ -77,17 +77,27 @@ stages:
     # Include caller source
     - checkout: self
       path: s/$(Carpenter.Pipeline.Directory)
+      name: checkoutSelf
 
     # Include pipeline for access to pipeline scripts
     - ${{ if not(containsValue(parameters.pipelineOperations,'ExcludePipeline')) }}:
       - checkout: Carpenter
         path: s/$(Carpenter.Pipeline.Directory)
+        name: checkoutCarpenter
 
     # Display information about the pipeline environment
     - task: PowerShell@2
       inputs:
         targetType: 'filePath'
         filePath: $(Carpenter.Pipeline.ScriptPath)/ShowEnvironment.ps1
-      displayName: Show environment information
+      displayName: Show environment (Pre-init)
       name: showEnvironment
+      
+    # Execute Pipeline initialization
+    - task: PowerShell@2
+      inputs:
+        targetType: 'filePath'
+        filePath: $(Carpenter.Pipeline.ScriptPath)/InitializePipeline.ps1
+      displayName: Initialize pipeline
+      name: initializePipeline
       
