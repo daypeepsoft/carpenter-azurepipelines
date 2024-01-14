@@ -14,6 +14,8 @@ Carpenter-AzurePipelines can be easily configured using the documentation below.
   * [Carpenter.Pipeline.Directory](#carpenterpipelinedirectory)
   * [Carpenter.Pipeline.Path](#carpenterpipelinepath)
   * [Carpenter.Pipeline.ScriptPath](#carpenterpipelinescriptpath)
+  * [Carpenter.Pipeline.ScriptDebug (scriptDebug)](#carpenterpipelinescriptdebug)
+  * [Carpenter.Pipeline.ScriptVerbose (scriptVerbose)](#carpenterpipelinescriptverbose)
 
 ## Settings hierarchy
 
@@ -83,3 +85,11 @@ The absolute path to the Carpenter pipeline supporting files. This value is dete
 ### Carpenter.Pipeline.ScriptPath
 
 The absolute path to the Carpenter pipeline scripts. This value is determined during template expansion.
+
+### Carpenter.Pipeline.ScriptDebug
+
+If True, PowerShell scripts launched by the pipeline will output debug messages.
+
+### Carpenter.Pipeline.ScriptVerbose
+
+If True, PowerShell scripts launched by the pipeline will output verbose messages.

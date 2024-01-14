@@ -36,6 +36,14 @@ parameters:
   type: object
   default: []
 
+- name: scriptDebug
+  type: boolean
+  default: False
+
+- name: scriptVerbose
+  type: boolean
+  default: False
+
 
 stages:
 ##############################################################################
@@ -72,6 +80,13 @@ stages:
     
     - name: Carpenter.Pipeline.ScriptPath
       value: $[ format('{0}/{1}', variables['Carpenter.Pipeline.Path'], 'scripts') ]
+    
+    - name: Carpenter.Pipeline.ScriptDebug
+      value: ${{ parameters.scriptDebug }}
+
+    - name: Carpenter.Pipeline.ScriptVerbose
+      value: ${{ parameters.scriptVerbose }}
+
 
     steps:
     # Include caller source
@@ -90,6 +105,10 @@ stages:
       inputs:
         targetType: 'filePath'
         filePath: $(Carpenter.Pipeline.ScriptPath)/ShowEnvironment.ps1
+        ${{ if eq(parameters.scriptDebug, True) }}:
+          debugPreference: continue
+        ${{ if eq(parameters.scriptVerbose, True) }}:
+          verbosePreference: continue
       displayName: Show environment (Pre-init)
       name: showEnvironment
       
@@ -98,7 +117,10 @@ stages:
       inputs:
         targetType: 'filePath'
         filePath: $(Carpenter.Pipeline.ScriptPath)/InitializePipeline.ps1
-        debugPreference: continue
+        ${{ if eq(parameters.scriptDebug, True) }}:
+          debugPreference: continue
+        ${{ if eq(parameters.scriptVerbose, True) }}:
+          verbosePreference: continue
       displayName: Initialize pipeline
       name: initializePipeline
       
