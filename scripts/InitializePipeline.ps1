@@ -36,7 +36,9 @@ param(
 	[string] $PipelineVersion		= $env:CARPENTER_PIPELINE_VERSION,
 	[string] $PipelineOperations	= $env:CARPENTER_PIPELINE_OPERATIONS,
 	[string] $PipelinePath			= $env:CARPENTER_PIPELINE_PATH,
-	[string] $PipelineScriptPath	= $env:CARPENTER_PIPELINE_SCRIPTPATH
+	[string] $PipelineScriptPath	= $env:CARPENTER_PIPELINE_SCRIPTPATH,
+	[string] $PipelineScriptDebug	= $env:CARPENTER_PIPELINE_SCRIPTDEBUG,
+	[string] $PipelineScriptVerbose = $env:CARPENTER_PIPELINE_SCRIPTVERBOSE
 )
 
 # script variables
