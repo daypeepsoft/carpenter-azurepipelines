@@ -72,7 +72,7 @@ $pipelineVersion = Set-CarpenterVariable -VariableName "Carpenter.Pipeline.Versi
 Write-Debug "Validating Carpenter.Pipeline.Operations (pipelineOperations)"
 $ops = ConvertFrom-Json $PipelineOperations
 if ($ops.Count -eq 0) {
-	Write-PipelineWarning "No pipelineOperations have been defined in the pipeline that extends Carpenter.AzurePipelines. For more information: https://github.com/daypeepsoft/carpenter-azurepipelines/blob/main/docs/configuration.md#carpenterpipelineoperations-pipelineoperations"
+	Write-PipelineWarning "No pipelineOperations have been defined in the pipeline that extend Carpenter.AzurePipelines. For more information: https://github.com/daypeepsoft/carpenter-azurepipelines/blob/main/docs/configuration.md#carpenterpipelineoperations-pipelineoperations"
 }
 $validOps = "ExcludePipeline"
 foreach ($op in $ops) {
@@ -81,3 +81,17 @@ foreach ($op in $ops) {
 	}
 }
 $pipelineOperations = Set-CarpenterVariable -VariableName Carpenter.Pipeline.Operations -OutputVariableName "pipelineOperations" -Value $($PipelineOperations -replace "  ","" -replace "`n"," " -replace "`r","")
+
+# Carpenter.Pipeline.Path
+Write-Debug "Validating Carpenter.Pipeline.Path"
+$pipelinePath = Set-CarpenterVariable -VariableName "Carpenter.Pipeline.Path" -OutputVariableName "pipelinePath" -Value $PipelinePath
+if (-not (Test-Path -Path $pipelinePath -PathType Directory)) {
+	Write-PipelineWarning "Carpenter.Pipeline.Path does not exist: $pipelinePath"
+}
+
+# Carpenter.Pipeline.ScriptPath
+Write-Debug "Validating Carpenter.Pipeline.ScriptPath"
+$pipelineScriptPath = Set-CarpenterVariable -VariableName "Carpenter.Pipeline.ScriptPath" -OutputVariableName "pipelineScriptPath" -Value $PipelineScriptPath
+if (-not (Test-Path -Path $pipelineScriptPath -PathType Directory)) {
+	Write-PipelineWarning "Carpenter.Pipeline.ScriptPath does not exist: $pipelineScriptPath"
+}
