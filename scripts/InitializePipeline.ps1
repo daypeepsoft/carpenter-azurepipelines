@@ -86,14 +86,26 @@ $pipelineOperations = Set-CarpenterVariable -VariableName Carpenter.Pipeline.Ope
 
 # Carpenter.Pipeline.Path
 Write-Debug "Validating Carpenter.Pipeline.Path"
-$pipelinePath = Set-CarpenterVariable -VariableName "Carpenter.Pipeline.Path" -OutputVariableName "pipelinePath" -Value (FixPath $PipelinePath)
 if (-not (Test-Path -Path $pipelinePath -PathType Container)) {
 	Write-PipelineWarning "Carpenter.Pipeline.Path does not exist: $pipelinePath"
 }
+$pipelinePath = Set-CarpenterVariable -VariableName "Carpenter.Pipeline.Path" -OutputVariableName "pipelinePath" -Value (FixPath $PipelinePath)
 
 # Carpenter.Pipeline.ScriptPath
 Write-Debug "Validating Carpenter.Pipeline.ScriptPath"
-$pipelineScriptPath = Set-CarpenterVariable -VariableName "Carpenter.Pipeline.ScriptPath" -OutputVariableName "pipelineScriptPath" -Value (FixPath $PipelineScriptPath)
 if (-not (Test-Path -Path $pipelineScriptPath -PathType Container)) {
 	Write-PipelineWarning "Carpenter.Pipeline.ScriptPath does not exist: $pipelineScriptPath"
 }
+$pipelineScriptPath = Set-CarpenterVariable -VariableName "Carpenter.Pipeline.ScriptPath" -OutputVariableName "pipelineScriptPath" -Value (FixPath $PipelineScriptPath)
+
+Write-Debug "Validating Carpenter.Pipeline.ScriptDebug (scriptDebug)"
+if ((-not ('True' -eq $PipelineScriptDebug)) -and (-not ('False' -eq $PipelineScriptDebug))) {
+	Write-PipelineError "scriptDebug parameter must be True or False."
+}
+$pipelineScriptDebug = Set-CarpenterVariable -VariableName "Carpenter.Pipeline.ScriptDebug" -OutputVariableName "pipelineScriptDebug" -Value $PipelineScriptDebug
+
+Write-Debug "Validating Carpenter.Pipeline.ScriptVerbose (scriptVerbose)"
+if ((-not ('True' -eq $PipelineScriptVerbose)) -and (-not ('False' -eq $PipelineScriptVerbose))) {
+	Write-PipelineError "scriptVerbose parameter must be True or False."
+}
+$pipelineScriptVerbose = Set-CarpenterVariable -VariableName "Carpenter.Pipeline.ScriptVerbose" -OutputVariableName "pipelineScriptVerbose" -Value $PipelineScriptVerbose
