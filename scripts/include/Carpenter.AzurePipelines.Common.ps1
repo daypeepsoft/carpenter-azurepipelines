@@ -172,6 +172,44 @@ Function Set-CarpenterVariable {
 } #end of function Set-CarpenterVariable
 
 
+Function Write-PipelineError {
+    <#
+        .SYNOPSIS
+
+        Writes a standard pipeline error message.
+
+        .PARAMETER Message
+
+        The message text describing the error.
+
+    #>
+	param(
+		[string] $Message
+	)
+    Write-Host "##vso[task.logissue type=error]$Message"
+	Throw $Message
+} #end of function Write-PipelineError
+
+
+Function Write-PipelineWarning {
+    <#
+        .SYNOPSIS
+
+        Writes a standard pipeline warning message.
+
+        .PARAMETER Message
+
+        The message text describing the warning.
+
+    #>
+	param(
+		[string] $Message
+	)
+    Write-Host "##vso[task.logissue type=warning]$Message"
+	Write-Warning $Message
+} #end of function Write-PipelineWarning
+
+
 Function Write-ScriptHeader {
 
 	<#

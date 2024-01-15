@@ -33,7 +33,8 @@
 
 [CmdletBinding()]
 param(
-	[string] $PipelineVersion = $env:CARPENTER_PIPELINE_VERSION
+	[string] $PipelineVersion		= $env:CARPENTER_PIPELINE_VERSION,
+	[string] $PipelineOperations	= $env:CARPENTER_PIPELINE_OPERATIONS
 )
 
 # script variables
@@ -52,13 +53,31 @@ $scriptName = Split-Path $PSCommandPath -Leaf
 Write-ScriptHeader "$scriptName"
 
 
+Write-Verbose "Validating Carpenter-AzurePipelines configuration"
+
 ######################################################################################################################
 # Pipeline Settings
 ######################################################################################################################
 
+Write-Debug "Validating Pipeline Settings"
+
 # Carpenter.Pipeline.Version (pipelineVersion)
-Write-Verbose "Validating Carpenter.Pipeline.Version (pipelineVersion)"
+Write-Debug "Validating Carpenter.Pipeline.Version (pipelineVersion)"
 if ((-not ($PipelineVersion | IsNumeric -Verbose:$false)) -or (-not ($PipelineVersion -gt 0))) {
 	Write-PipelineError "The pipelineVersion parameter must be supplied to the Carpenter-AzurePipelines template."
 }
 $pipelineVersion = Set-CarpenterVariable -VariableName "Carpenter.Pipeline.Version" -OutputVariableName "pipelineVersion" -Value $PipelineVersion
+
+# Carpenter.Pipeline.Operations (operations)
+Write-Debug "Validating Carpenter.Pipeline.Operations (pipelineOperations)"
+$ops = ConvertFrom-Json $PipelineOperations
+if ($ops.Count -eq 0) {
+	Write-PipelineWarning "No pipelineOperations have been defined in the pipeline that extends Carpenter.AzurePipelines. For more information: https://github.com/daypeepsoft/carpenter-azurepipelines/blob/main/docs/configuration.md#carpenterpipelineoperations-pipelineoperations"
+}
+$validOps = "ExcludePipeline"
+foreach ($op in $ops) {
+	if (-not ($validOps -contains $op)) {
+		Write-PipelineError "Unrecognized pipelineOperation parameter '$op'."
+	}
+}
+$pipelineOperations = Set-CarpenterVariable -VariableName Carpenter.Pipeline.Operations -OutputVariableName "pipelineOperations" -Value $($PipelineOperations -replace "  ","" -replace "`n"," " -replace "`r","")

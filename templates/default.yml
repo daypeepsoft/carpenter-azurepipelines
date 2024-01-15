@@ -109,8 +109,8 @@ stages:
           debugPreference: continue
         ${{ if eq(parameters.scriptVerbose, True) }}:
           verbosePreference: continue
-      displayName: Show environment (Pre-init)
-      name: showEnvironment
+      displayName: Uninitialized environment
+      name: showEnvironmentUninitialized
       
     # Execute Pipeline initialization
     - task: PowerShell@2
