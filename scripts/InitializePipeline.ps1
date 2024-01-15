@@ -40,8 +40,9 @@ param(
 	[string] $PipelineScriptDebug	= $env:CARPENTER_PIPELINE_SCRIPTDEBUG,
 	[string] $PipelineScriptVerbose = $env:CARPENTER_PIPELINE_SCRIPTVERBOSE
 )
-
 # script variables
+$currentPipelineVersion = 2
+Write-Debug "currentPipelineVersion: $currentPipelineVersion"
 $path = Get-Location
 Write-Debug "path: $path"
 $scriptName = $MyInvocation.MyCommand.Name
@@ -69,6 +70,12 @@ Write-Debug "Validating Pipeline Settings"
 Write-Debug "Validating Carpenter.Pipeline.Version (pipelineVersion)"
 if ((-not ($PipelineVersion | IsNumeric -Verbose:$false)) -or (-not ($PipelineVersion -gt 0))) {
 	Write-PipelineError "The pipelineVersion parameter must be supplied to the Carpenter-AzurePipelines template."
+}
+if ($PipelineVersion -gt $currentPipelineVersion) {
+	Write-PipelineWarning "The pipelineVersion parameter ($PipelineVersion) is greater than the current Carpenter-AzurePipelines template pipeline version. Future changes could break your build."
+}
+if ($PipelineVersion -lt $currentPipelineVersion) {
+	Write-PipelineWarning "The pipelineVersion parameter ($PipelineVersion) is less than the current Carpenter-AzurePipelines template pipeline version. You may be missing out on awesome features."
 }
 $pipelineVersion = Set-CarpenterVariable -VariableName "Carpenter.Pipeline.Version" -OutputVariableName "pipelineVersion" -Value $PipelineVersion
 
