@@ -5,6 +5,20 @@
 
 #>
 
+function FixPath {
+<#
+.SYNOPSIS
+    Fixes a path to make it consistent.
+
+.PARAMETER Path
+    The path to fix.
+#>
+param(
+    [string] $Path
+)
+return $Path.Replace("\",[IO.Path]::DirectorySeparatorChar).Replace("/",[IO.Path]::DirectorySeparatorChar)
+} #end of function FixPath
+
 function IsNumeric {
  
 <#   
