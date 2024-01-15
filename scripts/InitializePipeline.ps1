@@ -21,6 +21,10 @@
 
 	None.
 	
+	.PARAMETER PipelineVersion
+
+    The version of the pipeline template. Defaults to CARPENTER_PIPELINE_VERSION environment variable.
+
 	.EXAMPLE
 
 	PS> InitializePipeline.ps1
@@ -29,7 +33,7 @@
 
 [CmdletBinding()]
 param(
-
+	[string] $PipelineVersion = $env:CARPENTER_PIPELINE_VERSION
 )
 
 # script variables
@@ -46,3 +50,15 @@ $scriptName = Split-Path $PSCommandPath -Leaf
 . "$scriptRoot/include/Carpenter.AzurePipelines.Common.ps1"
 
 Write-ScriptHeader "$scriptName"
+
+
+######################################################################################################################
+# Pipeline Settings
+######################################################################################################################
+
+# Carpenter.Pipeline.Version (pipelineVersion)
+Write-Verbose "Validating Carpenter.Pipeline.Version (pipelineVersion)"
+if ((-not ($PipelineVersion | IsNumeric -Verbose:$false)) -or (-not ($PipelineVersion -gt 0))) {
+	Write-PipelineError "The pipelineVersion parameter must be supplied to the Carpenter-AzurePipelines template."
+}
+$pipelineVersion = Set-CarpenterVariable -VariableName "Carpenter.Pipeline.Version" -OutputVariableName "pipelineVersion" -Value $PipelineVersion
