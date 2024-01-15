@@ -87,13 +87,13 @@ $pipelineOperations = Set-CarpenterVariable -VariableName Carpenter.Pipeline.Ope
 # Carpenter.Pipeline.Path
 Write-Debug "Validating Carpenter.Pipeline.Path"
 $pipelinePath = Set-CarpenterVariable -VariableName "Carpenter.Pipeline.Path" -OutputVariableName "pipelinePath" -Value $PipelinePath
-if (-not (Test-Path -Path $pipelinePath -PathType Directory)) {
+if (-not (Test-Path -Path $pipelinePath -PathType Container)) {
 	Write-PipelineWarning "Carpenter.Pipeline.Path does not exist: $pipelinePath"
 }
 
 # Carpenter.Pipeline.ScriptPath
 Write-Debug "Validating Carpenter.Pipeline.ScriptPath"
 $pipelineScriptPath = Set-CarpenterVariable -VariableName "Carpenter.Pipeline.ScriptPath" -OutputVariableName "pipelineScriptPath" -Value $PipelineScriptPath
-if (-not (Test-Path -Path $pipelineScriptPath -PathType Directory)) {
+if (-not (Test-Path -Path $pipelineScriptPath -PathType Container)) {
 	Write-PipelineWarning "Carpenter.Pipeline.ScriptPath does not exist: $pipelineScriptPath"
 }
